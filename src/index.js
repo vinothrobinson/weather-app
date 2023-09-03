@@ -1,6 +1,6 @@
 import { apiKey } from "./apiKey";
 const week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-let currentCity = "lOndon"
+let currentCity = "MISSISSAUGA"
 
 // This object holds the info needed for daily weather (for a 3 day forecast)
 class WeatherDaily {
@@ -34,12 +34,33 @@ async function getWeather() {
   console.log(forecastInfo)
 }
 
-function changeCity() {
+document.querySelector("#new-city-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    changeCity();
+})
 
+// This function changes the city
+function changeCity() {
+    currentCity = document.querySelector("#city").value
+    currentCity.toUpperCase()
+    document.querySelector("#new-city-form").reset()
+    displayCity()
 }
 
-getWeather();
+// This function displays the new city name and gets the data from WeatherAPI
+function displayCity() {
+    document.querySelector(".city-name").textContent = currentCity;
+    getWeather()
+}
 
+displayCity();
+
+// This prevents a notification to pop up after refreshing the screen
+if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
+
+// Testing API
   /*
   console.log(weatherData)
   console.log(weatherData.forecast);
