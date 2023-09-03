@@ -1,6 +1,10 @@
 import { apiKey } from "./apiKey";
+import { displayDaily } from "./display";
+
+
 const week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 let currentCity = "MISSISSAUGA"
+export let forecastInfo = [];
 
 // This object holds the info needed for daily weather (for a 3 day forecast)
 class WeatherDaily {
@@ -21,17 +25,18 @@ async function getWeather() {
   const weatherData = await response.json();
   console.log(weatherData.forecast);
   let forecastList = weatherData.forecast.forecastday;
-  let forecastInfo = [];
+  forecastInfo = [];
   for (let i = 0; i < forecastList.length; i++) {
     let day = week[(new Date(forecastList[i].date)).getDay()]
-    let max_temp = forecastList[i].day.maxtemp_c;
-    let min_temp = forecastList[i].day.mintemp_c;
+    let max_temp = forecastList[i].day.maxtemp_c + " °C";
+    let min_temp = forecastList[i].day.mintemp_c + " °C";
     let weather = forecastList[i].day.condition.text
     let weatherDaily = new WeatherDaily(day, max_temp, min_temp, weather)
     // weatherInfo.push(week[date.getDay()])
     forecastInfo.push(weatherDaily);
   }
   console.log(forecastInfo)
+  displayDaily();
 }
 
 document.querySelector("#new-city-form").addEventListener("submit", function(event) {
