@@ -1,10 +1,9 @@
 import { apiKey } from "./apiKey";
 import { displayDaily } from "./display";
 
-
-const week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 let currentCity = "MISSISSAUGA"
 export let forecastInfo = [];
+export let hourlyInfo = [];
 
 // This object holds the info needed for daily weather (for a 3 day forecast)
 class WeatherDaily {
@@ -16,14 +15,31 @@ class WeatherDaily {
     }
 }
 
+// This object holds the info needed for daily weather (for a 3 day forecast)
+class WeatherHourly {
+    constructor(time, temp, weather) {
+        this.time = time;
+        this.temp = temp;
+        this.weather = weather
+    }
+}
+// Lists for days and hours
+const week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+const hours = [
+    "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM",
+    "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM",
+    "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM",
+    "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM",
+]
+
 // This function retrieves information regarding the weather of the specified city
-async function getWeather() {
+async function getWeatherForecast() {
   const response = await fetch(
     `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${currentCity}&days=3`,
     { mode: "cors" },
   );
   const weatherData = await response.json();
-  console.log(weatherData.forecast);
+  console.log(weatherData);
   let forecastList = weatherData.forecast.forecastday;
   forecastInfo = [];
   for (let i = 0; i < forecastList.length; i++) {
@@ -32,12 +48,32 @@ async function getWeather() {
     let min_temp = forecastList[i].day.mintemp_c + " °C";
     let weather = forecastList[i].day.condition.text
     let weatherDaily = new WeatherDaily(day, max_temp, min_temp, weather)
-    // weatherInfo.push(week[date.getDay()])
     forecastInfo.push(weatherDaily);
   }
   console.log(forecastInfo)
   displayDaily();
 }
+
+// Get Hourly Weather For The Current Day
+async function getWeatherHourly() {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${currentCity}&days=3`,
+      { mode: "cors" },
+    );
+    const weatherData = await response.json();
+    console.log(weatherData);
+    let forecastList = weatherData.forecast.forecastday[0].hour;
+    hourlyInfo = [];
+    for (let i = 0; i < forecastList.length; i++) {
+      let time = hours[(new Date(forecastList[i].time)).getHours()]
+      let temp = forecastList[i].temp_c + " °C";
+      let weather = forecastList[i].condition.text
+      let weatherHourly = new WeatherHourly(time, temp, weather);
+      hourlyInfo.push(weatherHourly);
+    }
+    console.log(hourlyInfo)
+    // displayDaily();
+  }
 
 document.querySelector("#new-city-form").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -55,7 +91,8 @@ function changeCity() {
 // This function displays the new city name and gets the data from WeatherAPI
 function displayCity() {
     document.querySelector(".city-name").textContent = currentCity;
-    getWeather()
+    getWeatherForecast();
+    getWeatherHourly();
 }
 
 displayCity();
