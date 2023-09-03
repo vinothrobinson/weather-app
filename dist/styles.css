@@ -8,6 +8,8 @@ body {
     background-size: cover;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .city-name {
@@ -15,3 +17,61 @@ body {
     font-family: "Bebas Neue";
     color: white;
 }
+
+#new-city-form {
+    opacity: 0.8;
+    margin-bottom: 34px;
+}
+
+#city {
+    padding: 4px;
+}
+
+.currentDisplay {
+    font-family: "Bebas Neue";
+}
+
+/* Styles for the daily weather information */
+.forecast {
+    /* border: 1px solid white; */
+    height: 30vh;
+    width: 70vh;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.dayOne, .dayTwo, .dayThree {
+    /* border: 1px solid white; */
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.day, .maxTemp, .minTemp, .weather {
+    color: white;
+}
+
+.day {
+    font-size: 2.0em;
+    font-family: "Bebas Neue";
+}
+
+.maxTemp {
+    font-size: 1.2em;
+}
+
+.minTemp {
+    font-size: 1.0em;
+    margin-bottom: 10px;
+}
+
+.maxTemp, .minTemp {
+    font-weight: 700;
+}
+
+.weather {
+    font-size: 1.8em;
+    font-family: "Bebas Neue";
+}
+
