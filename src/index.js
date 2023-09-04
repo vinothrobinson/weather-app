@@ -1,9 +1,11 @@
 import { apiKey } from "./apiKey";
-import { displayDaily } from "./display";
+import { displayDaily, displayHourly } from "./display";
 
 let currentCity = "MISSISSAUGA"
 export let forecastInfo = [];
 export let hourlyInfo = [];
+export let nightTime = 0;
+export let dayTime = 0;
 
 // This object holds the info needed for daily weather (for a 3 day forecast)
 class WeatherDaily {
@@ -17,10 +19,11 @@ class WeatherDaily {
 
 // This object holds the info needed for daily weather (for a 3 day forecast)
 class WeatherHourly {
-    constructor(time, temp, weather) {
+    constructor(time, temp, hourInt, weather) {
         this.time = time;
         this.temp = temp;
-        this.weather = weather
+        this.hourInt = hourInt;
+        this.weather = weather;
     }
 }
 // Lists for days and hours
@@ -62,17 +65,27 @@ async function getWeatherHourly() {
     );
     const weatherData = await response.json();
     console.log(weatherData);
+    
+    let sunset = weatherData.forecast.forecastday[0].astro.sunset
+    let sunrise = weatherData.forecast.forecastday[0].astro.sunrise
+    let date = weatherData.forecast.forecastday[0].date
+    nightTime = (new Date(date + " " + sunset)).getHours()
+    dayTime = (new Date(date + " " + sunrise)).getHours()
+  
+    
     let forecastList = weatherData.forecast.forecastday[0].hour;
     hourlyInfo = [];
     for (let i = 0; i < forecastList.length; i++) {
       let time = hours[(new Date(forecastList[i].time)).getHours()]
+      let hourInt = (new Date(forecastList[i].time)).getHours();
       let temp = forecastList[i].temp_c + " °C";
       let weather = forecastList[i].condition.text
-      let weatherHourly = new WeatherHourly(time, temp, weather);
+      let weatherHourly = new WeatherHourly(time, temp, hourInt, weather);
       hourlyInfo.push(weatherHourly);
     }
     console.log(hourlyInfo)
-    // displayDaily();
+    let counter = 0;
+    displayHourly(counter);
   }
 
 document.querySelector("#new-city-form").addEventListener("submit", function(event) {
