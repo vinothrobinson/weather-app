@@ -39,7 +39,7 @@ function displayHourly(counter) {
         hours[i].querySelector(".temp").textContent = hourlyInfo[counter].temp
         hours[i].querySelector(".weather").textContent = hourlyInfo[counter].weather
         
-        if (counter < dayTime || counter > nightTime) {
+        if (counter <= dayTime || counter > nightTime) {
             hours[i].querySelector("img").src = nightIcons[hourlyInfo[counter].weather]
         } else {
             hours[i].querySelector("img").src = dayIcons[hourlyInfo[counter].weather]
@@ -48,4 +48,22 @@ function displayHourly(counter) {
         counter++;
     }
 }
+
+let changeType = document.querySelector(".change-forecast");
+changeType.addEventListener("click", function(){
+    let currentDisplay = document.querySelector(".currentDisplay")
+    if (currentDisplay.textContent === "Daily Forecast"){
+        currentDisplay.textContent = "Hourly Forecast"
+        document.querySelector(".forecast").style.display = "none";
+        document.querySelector(".hourly").style.display = "flex";
+        document.querySelector(".buttons").style.display = "flex";
+        changeType.textContent = "Change To Daily"
+    } else {
+        currentDisplay.textContent = "Daily Forecast"
+        document.querySelector(".forecast").style.display = "flex";
+        document.querySelector(".hourly").style.display = "none";
+        document.querySelector(".buttons").style.display = "none";
+        changeType.textContent = "Change To Hourly"
+    }
+})
 export {displayDaily, displayHourly};
