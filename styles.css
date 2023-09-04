@@ -48,11 +48,12 @@ body {
     align-items: center;
 }
 
-.day, .maxTemp, .minTemp, .weather {
+.day, .maxTemp, .minTemp, .weather,  
+.hour, .temp {
     color: white;
 }
 
-.day {
+.day, .hour {
     font-size: 2.0em;
     font-family: "Bebas Neue";
 }
@@ -61,7 +62,7 @@ body {
     font-size: 1.2em;
 }
 
-.minTemp {
+.minTemp, .temp {
     font-size: 1.0em;
     margin-bottom: 10px;
 }
@@ -75,3 +76,25 @@ body {
     font-family: "Bebas Neue";
 }
 
+/* Styling for Hourly Weather */
+
+.hourly {
+    height: 30vh;
+    width: 150vh;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+.switch-page {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    opacity: 0.8;
+    border-radius: 50%;
+}
