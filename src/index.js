@@ -1,6 +1,8 @@
 import { apiKey } from "./apiKey";
 import { displayDaily, displayHourly } from "./display";
 
+let dummyVar = "test";
+console.log(dummyVar);
 let currentCity = "MISSISSAUGA"
 export let forecastInfo = [];
 export let hourlyInfo = [];
@@ -114,23 +116,3 @@ displayCity();
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
-
-// Testing API
-  /*
-  console.log(weatherData)
-  console.log(weatherData.forecast);
-  let date = new Date(weatherData.forecast.forecastday[0].date)
-  console.log(week[date.getDay()])
-  console.log(weatherData.forecast.forecastday[0].day.avgtemp_c);
-  console.log(weatherData.forecast.forecastday[0].day.condition.text);
-
-  let date1 = new Date(weatherData.forecast.forecastday[1].date)
-  console.log(week[date1.getDay()])
-  console.log(weatherData.forecast.forecastday[1].day.avgtemp_c);
-  console.log(weatherData.forecast.forecastday[1].day.condition.text);
-
-  let date2 = new Date(weatherData.forecast.forecastday[2].date)
-  console.log(week[date2.getDay()])
-  console.log(weatherData.forecast.forecastday[2].day.avgtemp_c);
-  console.log(weatherData.forecast.forecastday[2].day.condition.text);
-  */
