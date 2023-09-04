@@ -91,7 +91,7 @@ body {
 .buttons {
     display: flex;
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 .switch-page {
     width: 10px;
