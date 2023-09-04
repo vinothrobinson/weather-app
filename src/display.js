@@ -1,6 +1,7 @@
 import { forecastInfo, hourlyInfo, nightTime, dayTime } from "./index.js"
 import { dayIcons, nightIcons } from "./weatherIcons.js"
 
+// This function displays the daily weather
 function displayDaily() {
     let dailyWeather = document.querySelector(".forecast")
     let days = dailyWeather.children
@@ -13,22 +14,22 @@ function displayDaily() {
     }
 }
 
+// This logic allows different weather hours to be displayed
 let switchScreen = document.querySelector(".buttons").children;
 switchScreen[0].addEventListener("click", function(){
     let counter = 0
     displayHourly(counter)
 })
-
 switchScreen[1].addEventListener("click", function(){
     let counter = 8
     displayHourly(counter)
 })
-
 switchScreen[2].addEventListener("click", function(){
     let counter = 16
     displayHourly(counter)
 })
 
+// This function displays the hourly weather
 function displayHourly(counter) {
     let hourlyWeather = document.querySelector(".hourly")
     let hours = hourlyWeather.children
@@ -44,11 +45,11 @@ function displayHourly(counter) {
         } else {
             hours[i].querySelector("img").src = dayIcons[hourlyInfo[counter].weather]
         }
-        
         counter++;
     }
 }
 
+// This logic allows the user to swap between daily or hourly weather
 let changeType = document.querySelector(".change-forecast");
 changeType.addEventListener("click", function(){
     let currentDisplay = document.querySelector(".currentDisplay")
