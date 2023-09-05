@@ -1,5 +1,5 @@
 import { forecastInfo, hourlyInfo, nightTime, dayTime } from "./index.js"
-import { dayIcons, nightIcons } from "./weatherIcons.js"
+import { dayIcons, nightIcons } from "../weatherIcons.js"
 
 // This function displays the daily weather
 function displayDaily() {
