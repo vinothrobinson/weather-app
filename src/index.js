@@ -1,7 +1,7 @@
 import { apiKey } from "./apiKey";
 import { displayDaily, displayHourly } from "./display";
 
-let dummyVar = "test2";
+let dummyVar = "test3";
 console.log(dummyVar);
 let currentCity = "MISSISSAUGA"
 export let forecastInfo = [];
@@ -67,7 +67,7 @@ async function getWeatherHourly() {
     );
     const weatherData = await response.json();
     console.log(weatherData);
-    
+    // Code that stores the sunrise and sunset time in order to display the correct icons
     let sunset = weatherData.forecast.forecastday[0].astro.sunset
     let sunrise = weatherData.forecast.forecastday[0].astro.sunrise
     let date = weatherData.forecast.forecastday[0].date
