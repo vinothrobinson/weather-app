@@ -6,6 +6,7 @@
 body {
     background-image: url(https://cdn.wallpapersafari.com/83/54/CKc3fw.png);
     background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +40,10 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    background-color: rgba(131, 128, 128, 0.8);
+    margin-bottom: 15px;
 }
+
 .dayOne, .dayTwo, .dayThree {
     /* border: 1px solid white; */
     width: 40%;
@@ -79,13 +83,14 @@ body {
 /* Styling for Hourly Weather */
 
 .hourly {
-    height: 20vh;
-    width: 170vh;
+    height: 25vh;
+    width: 180vh;
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
     margin-bottom: 20px;
     gap: 20px;
+    background-color: rgba(131, 128, 128, 0.8);
 }
 
 .buttons {
