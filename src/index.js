@@ -1,8 +1,8 @@
 import { apiKey } from "./apiKey";
 import { displayDaily, displayHourly } from "./display";
 
-let dummyVar = "test3";
-console.log(dummyVar);
+let dummyVar2 = "test4";
+console.log(dummyVar2);
 let currentCity = "MISSISSAUGA"
 export let forecastInfo = [];
 export let hourlyInfo = [];
