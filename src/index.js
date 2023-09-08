@@ -2,6 +2,7 @@ import { apiKey } from "./apiKey";
 import { displayDaily, displayHourly } from "./display";
 
 let currentCity = "MISSISSAUGA"
+let isCelsius = true;
 export let forecastInfo = [];
 export let hourlyInfo = [];
 export let nightTime = 0;
@@ -47,13 +48,20 @@ async function getWeatherForecast() {
   forecastInfo = [];
   for (let i = 0; i < forecastList.length; i++) {
     let day = week[(new Date(forecastList[i].date)).getDay()]
-    let max_temp = forecastList[i].day.maxtemp_c + " °C";
-    let min_temp = forecastList[i].day.mintemp_c + " °C";
+    let max_temp = "0"
+    let min_temp = "0"
+    if (isCelsius) {
+      max_temp = forecastList[i].day.maxtemp_c + " °C";
+      min_temp = forecastList[i].day.mintemp_c + " °C";
+    } else {
+      max_temp = forecastList[i].day.maxtemp_f + " °F";
+      min_temp = forecastList[i].day.mintemp_f + " °F";
+    }
     let weather = forecastList[i].day.condition.text
     let weatherDaily = new WeatherDaily(day, max_temp, min_temp, weather)
     forecastInfo.push(weatherDaily);
   }
-  console.log(forecastInfo)
+  // console.log(forecastInfo)
   displayDaily();
 }
 
@@ -78,12 +86,18 @@ async function getWeatherHourly() {
     for (let i = 0; i < forecastList.length; i++) {
       let time = hours[(new Date(forecastList[i].time)).getHours()]
       let hourInt = (new Date(forecastList[i].time)).getHours();
-      let temp = forecastList[i].temp_c + " °C";
+      let temp = "0";
+      console.log(isCelsius)
+      if (isCelsius) {
+        temp = forecastList[i].temp_c + " °C";
+      } else {
+        temp = forecastList[i].temp_f + " °F";
+      }
       let weather = forecastList[i].condition.text
       let weatherHourly = new WeatherHourly(time, temp, hourInt, weather);
       hourlyInfo.push(weatherHourly);
     }
-    console.log(hourlyInfo)
+    // console.log(hourlyInfo)
     let counter = 0;
     displayHourly(counter);
   }
@@ -107,6 +121,34 @@ function displayCity() {
     getWeatherForecast();
     getWeatherHourly();
 }
+
+let changeTemp = document.querySelector(".change-temp");
+changeTemp.addEventListener("click", function(){
+  if (this.textContent === "Change to °F") {
+    this.textContent = "Change to °C"
+    isCelsius = false;
+    displayCity();
+} else {
+    this.textContent = "Change to °F"
+    isCelsius = true;
+    displayCity();
+  }
+});
+
+/*
+function changeTemp() {
+  console.log("test")
+  if (this.textContent = "Change to °F") {
+      this.textContent = "Change to °C"
+      isCelsius = false;
+      displayCity();
+  } else {
+      this.textContent = "Change to °F"
+      isCelsius = true;
+      displayCity();
+    }
+}
+*/
 
 displayCity();
 
