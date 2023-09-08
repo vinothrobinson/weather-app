@@ -2,7 +2,7 @@ export const dayIcons = {
     "Sunny": "./weather/64x64/day/113.png",
     "Partly cloudy": "./weather/64x64/day/116.png",
     "Cloudy": "./weather/64x64/day/119.png",
-    "Overcast": ".weather/64x64/day/122.png",
+    "Overcast": "./weather/64x64/day/122.png",
     "Mist": "./weather/64x64/day/143.png",
     "Patchy rain possible": "./weather/64x64/day/176.png",
     "Patchy snow possible": "./weather/64x64/day/179.png",
