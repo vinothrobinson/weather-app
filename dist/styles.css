@@ -106,6 +106,6 @@ body {
     border-radius: 50%;
 }
 
-.change-forecast {
+.change-forecast, .change-temp {
     padding: 5px;
 }
