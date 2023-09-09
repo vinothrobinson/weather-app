@@ -72,7 +72,7 @@ async function getWeatherHourly() {
       { mode: "cors" },
     );
     const weatherData = await response.json();
-    console.log(weatherData);
+    // console.log(weatherData);
     // Code that stores the sunrise and sunset time in order to display the correct icons
     let sunset = weatherData.forecast.forecastday[0].astro.sunset
     let sunrise = weatherData.forecast.forecastday[0].astro.sunrise
@@ -87,7 +87,6 @@ async function getWeatherHourly() {
       let time = hours[(new Date(forecastList[i].time)).getHours()]
       let hourInt = (new Date(forecastList[i].time)).getHours();
       let temp = "0";
-      console.log(isCelsius)
       if (isCelsius) {
         temp = forecastList[i].temp_c + " °C";
       } else {
@@ -122,6 +121,7 @@ function displayCity() {
     getWeatherHourly();
 }
 
+// Logic that allows for the temperature values to be swapped
 let changeTemp = document.querySelector(".change-temp");
 changeTemp.addEventListener("click", function(){
   if (this.textContent === "Change to °F") {
@@ -134,21 +134,6 @@ changeTemp.addEventListener("click", function(){
     displayCity();
   }
 });
-
-/*
-function changeTemp() {
-  console.log("test")
-  if (this.textContent = "Change to °F") {
-      this.textContent = "Change to °C"
-      isCelsius = false;
-      displayCity();
-  } else {
-      this.textContent = "Change to °F"
-      isCelsius = true;
-      displayCity();
-    }
-}
-*/
 
 displayCity();
 
